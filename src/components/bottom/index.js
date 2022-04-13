@@ -10,8 +10,6 @@ import { Store } from '../../pages/store';
 import { Profile } from '../../pages/profile';
 import { Settings } from '../../pages/settings';
 
-
-
 const Tab = createBottomTabNavigator();
 
 export function Bottom(){
