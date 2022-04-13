@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from "react-native-web";
+import styles from "./style";
 
 export function Content(){
     const [n1, setN1] = useState('');
@@ -16,10 +17,12 @@ export function Content(){
         keyboard.dismiss();
     }
     return(
-        <View>
-            <Text>A média é</Text>
+        <View style={styles.boxView}>
 
-            <TextInput
+            <br/>
+            <br/>
+
+            <TextInput style ={styles.textInput}
 
             maxLength={4}
             keyboardType='decimal-pad'
@@ -28,7 +31,7 @@ export function Content(){
             onChangeText={(int) => setN1(int)}
             />
 
-            <TextInput
+            <TextInput style ={styles.textInput}
 
             maxLength={4}
             keyboardType='decimal-pad'
@@ -37,7 +40,7 @@ export function Content(){
             onChangeText={(int) => setN2(int)}
             />
 
-            <TextInput
+            <TextInput style ={styles.textInput}
 
             maxLength={4}
             keyboardType='decimal-pad'
@@ -46,30 +49,40 @@ export function Content(){
             onChangeText={(int) => setN3(int)}
             />
 
-            <TouchableOpacity
+            <TouchableOpacity style={styles.btnCalc}
             
             activeOpacity={0.7}
             onPress={resultMedia}
             >
-            
+
             <Text>Calcular Média</Text>
             </TouchableOpacity>
+
+            <br/>
+            <br/>
             
             <View>
-                <Text>Total: {media.toFixed(1)}</Text>
-                <Text>Média: {por.toFixed(1)}</Text>
+                <Text style={styles.statusMedia}>Total: {media.toFixed(1)}</Text>
+                <Text style={styles.statusMedia}>Média: {por.toFixed(1)}</Text>
             </View>
 
-            {por < 5 ? (
-                <Text>Reprovado</Text>
-            ) : por >= 5 && por < 7 ? (
-                <Text>Recuperação</Text>
-            ) : por > 7 && por <= 10 ? (
-                <Text>Aprovado</Text>
-            ) : (
-                <Text>Não foi possível calcular</Text>
-            )}
+            {por < 5 && por >= 0 && (
+				<Text style={styles.statusMedia}>Reprovado</Text>
+			)}
 
+			{por >= 5 && por < 7 && (
+				<Text style={styles.statusMedia}>Recuperação</Text>
+			)}
+
+            {por >= 7 && por <= 10 && (
+				<Text style={styles.statusMedia}>Aprovado</Text>
+			)}
+
+			{por > 10 &&  (
+				<Text style={styles.statusMedia}>Média máxima: 10</Text>
+			)}
+                <br/>
+                <br/>
         </View>  
     )
 }
